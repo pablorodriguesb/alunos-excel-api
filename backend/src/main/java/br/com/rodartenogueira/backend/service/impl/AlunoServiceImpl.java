@@ -50,19 +50,19 @@ public class AlunoServiceImpl implements AlunoService {
                 Row row = it.next();
                 if (first) { first = false; continue; }
 
-                String nome = getCellAsString(row.getCell(0));
-                String sexoStr = getCellAsString(row.getCell(1));
+                String nome = getCellAsString(row.getCell(1));
+                String sexoStr = getCellAsString(row.getCell(2));
 
                 LocalDate dataNasc;
                 try {
-                    dataNasc = row.getCell(2).getLocalDateTimeCellValue().toLocalDate();
+                    dataNasc = row.getCell(3).getLocalDateTimeCellValue().toLocalDate();
                 } catch (Exception e) {
                     continue;
                 }
 
-                Cell cellNota1 = row.getCell(3);
-                Cell cellNota2 = row.getCell(4);
-                Cell cellNota3 = row.getCell(5);
+                Cell cellNota1 = row.getCell(4);
+                Cell cellNota2 = row.getCell(5);
+                Cell cellNota3 = row.getCell(6);
                 // Se qualquer nota for ausente ou blank, pula
                 if (cellNota1 == null || cellNota1.getCellType() == CellType.BLANK ||
                         cellNota2 == null || cellNota2.getCellType() == CellType.BLANK ||
@@ -88,7 +88,7 @@ public class AlunoServiceImpl implements AlunoService {
                 Aluno aluno = new Aluno(nome, sexo, dataNasc, nota1, nota2, nota3);
                 alunos.add(aluno);
             }
-
+            System.out.println("Qtde de alunos lidos do excel: " + alunos.size());
             alunoRepository.saveAll(alunos);
 
         } catch (Exception e) {
