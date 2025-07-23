@@ -19,6 +19,10 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "A identificação é obrigatória.")
+    @Column(nullable = false, length = 50)
+    private String identificacao;
+
     @NotBlank(message = "O nome é obrigatório.")
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres.")
     @Column(nullable = false, length = 100)
@@ -57,7 +61,8 @@ public class Aluno {
     }
 
     // Construtor completo
-    public Aluno(String nome, Sexo sexo, LocalDate dataNascimento, Double nota1, Double nota2, Double nota3) {
+    public Aluno(String identificacao, String nome, Sexo sexo, LocalDate dataNascimento, Double nota1, Double nota2, Double nota3) {
+        this.identificacao = identificacao;
         this.nome = nome;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;

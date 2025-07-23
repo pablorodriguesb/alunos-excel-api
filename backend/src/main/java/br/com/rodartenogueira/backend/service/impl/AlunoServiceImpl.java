@@ -13,12 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +49,7 @@ public class AlunoServiceImpl implements AlunoService {
                 Row row = it.next();
                 if (first) { first = false; continue; }
 
+                String identificacao = getCellAsString(row.getCell(0));
                 String nome = getCellAsString(row.getCell(1));
                 String sexoStr = getCellAsString(row.getCell(2));
 
@@ -85,7 +85,7 @@ public class AlunoServiceImpl implements AlunoService {
                 if (dataNasc.isAfter(LocalDate.now())) continue;
                 if (nota1 < 0 || nota1 > 100 || nota2 < 0 || nota2 > 100 || nota3 < 0 || nota3 > 100) continue;
 
-                Aluno aluno = new Aluno(nome, sexo, dataNasc, nota1, nota2, nota3);
+                Aluno aluno = new Aluno(identificacao, nome, sexo, dataNasc, nota1, nota2, nota3);
                 alunos.add(aluno);
             }
             System.out.println("Qtde de alunos lidos do excel: " + alunos.size());
@@ -125,23 +125,27 @@ public class AlunoServiceImpl implements AlunoService {
 
             // Monta cabecalho
             Row header = sheet.createRow(0);
-            header.createCell(0).setCellValue("ID");
+            header.createCell(0).setCellValue("Identificação");
             header.createCell(1).setCellValue("Nome");
             header.createCell(2).setCellValue("Idade");
-            header.createCell(3).setCellValue("Média");
+            header.createCell(3).setCellValue("Média das Notas");
 
             // Busca alunos e monta linhas
             List<Aluno> alunos = alunoRepository.findAll();
             int rowIdx = 1;
+            Locale localeBR = Locale.forLanguageTag("pt-BR");
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(localeBR);
+            DecimalFormat df = new DecimalFormat("0.00", symbols);
+
             for (Aluno aluno : alunos) {
                 int idade = Period.between(aluno.getDataNascimento(), LocalDate.now()).getYears();
                 double media = (aluno.getNota1() + aluno.getNota2() + aluno.getNota3()) / 3.0;
 
                 Row row = sheet.createRow(rowIdx++);
-                row.createCell(0).setCellValue(aluno.getId());
+                row.createCell(0).setCellValue(aluno.getIdentificacao());
                 row.createCell(1).setCellValue(aluno.getNome());
                 row.createCell(2).setCellValue(idade);
-                row.createCell(3).setCellValue(media);
+                row.createCell(3).setCellValue(df.format(media));
             }
 
             workbook.write(out);
