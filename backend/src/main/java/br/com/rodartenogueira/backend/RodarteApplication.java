@@ -1,4 +1,4 @@
-package br.com.rodartenogueira.projeto;
+package br.com.rodartenogueira.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RodarteApplication {
 
 	public static void main(String[] args) {
-		RodarteApplication.run(RodarteApplication.class, args);
+		SpringApplication.run(RodarteApplication.class, args);
 	}
 
 }
