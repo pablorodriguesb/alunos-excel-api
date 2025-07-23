@@ -165,8 +165,6 @@ public class AlunoServiceImpl implements AlunoService {
                 return String.valueOf(cell.getBooleanCellValue());
             case FORMULA:
                 return cell.getCellFormula();
-            case BLANK:
-                return "";
             default:
                 return "";
         }
