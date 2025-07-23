@@ -105,7 +105,7 @@ public class AlunoServiceImpl implements AlunoService {
                     int idade = Period.between(aluno.getDataNascimento(), LocalDate.now()).getYears();
                     double media = (aluno.getNota1() + aluno.getNota2() + aluno.getNota3()) / 3.0;
                     AlunoDTO dto = new AlunoDTO();
-                    dto.setId(aluno.getId());
+                    dto.setIdentificacao(aluno.getIdentificacao());
                     dto.setNome(aluno.getNome());
                     dto.setIdade(idade);
                     dto.setMediaNotas(media);
