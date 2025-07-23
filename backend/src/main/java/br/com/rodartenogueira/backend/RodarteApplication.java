@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AlunoApplication {
+public class RodarteApplication {
 
 	public static void main(String[] args) {
-		AlunoApplication.run(AlunoApplication.class, args);
+		RodarteApplication.run(RodarteApplication.class, args);
 	}
 
 }
