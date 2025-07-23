@@ -50,8 +50,8 @@ public class AlunoServiceImpl implements AlunoService {
                 Row row = it.next();
                 if (first) { first = false; continue; }
 
-                String nome = row.getCell(0).getStringCellValue();
-                String sexoStr = row.getCell(1).getStringCellValue();
+                String nome = getCellAsString(row.getCell(0));
+                String sexoStr = getCellAsString(row.getCell(1));
 
                 LocalDate dataNasc;
                 try {
@@ -78,7 +78,7 @@ public class AlunoServiceImpl implements AlunoService {
 
                 Sexo sexo;
                 try {
-                    sexo = Sexo.valueOf(sexoStr);
+                    sexo = Sexo.valueOf(sexoStr.trim().toUpperCase());
                 } catch (Exception e) {
                     continue;
                 }
@@ -148,6 +148,27 @@ public class AlunoServiceImpl implements AlunoService {
             return new ByteArrayInputStream(out.toByteArray());
         } catch (Exception e) {
             throw new RuntimeException("Falha ao exportar Excel: " + e.getMessage(), e);
+        }
+    }
+
+    // método utilitário
+    private String getCellAsString(Cell cell) {
+        if (cell == null) return "";
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                double d = cell.getNumericCellValue();
+                if (d == (long) d) return String.valueOf((long) d);
+                return String.valueOf(d);
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return cell.getCellFormula();
+            case BLANK:
+                return "";
+            default:
+                return "";
         }
     }
 }
