@@ -1,13 +1,13 @@
-# Maven / IntelliJ / Eclipse / NetBeans / VSCode
+# === MAVEN / JAVA BUILD ===
 target/
+out/
+
+# === IDEs ===
 .classpath
 .project
 .settings/
 .idea/
 *.iml
-.mvn/wrapper/maven-wrapper.jar
-mvnw
-mvnw.cmd
 .factorypath
 .springBeans
 .sts4-cache
@@ -17,9 +17,13 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-out/
 
-# Logs e arquivos temporários
+# === MAVEN WRAPPER ===
+.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# === LOGS E TEMPORÁRIOS ===
 *.log
 *.zip
 *.tar.gz
@@ -29,12 +33,36 @@ out/
 *~
 *.swp
 
-# Cobertura de testes
+# === COBERTURA DE TESTES ===
 coverage/
 jacoco.exec
 *.ec
 *.coverage
 
-# System files globais (caso clone direto em Windows/Mac)
+# === SISTEMA OPERACIONAL ===
 .DS_Store
 Thumbs.db
+
+# === BANCO DE DADOS E DUMPS ===
+*.db
+*.mv.db
+*.trace.db
+*.sql
+
+# === ARQUIVOS DE CONFIGURAÇÃO SENSÍVEIS ===
+# (ignora todos application.properties reais do backend)
+src/main/resources/application.properties
+src/main/resources/application-dev.properties
+src/test/resources/application-test.properties
+
+# === PERMITIR EXEMPLOS PARA FÁCIL SETUP LOCAL ===
+!src/main/resources/application.properties.example
+!src/main/resources/application-dev.properties.example
+!src/test/resources/application-test.properties.example
+
+# === EXCEL DE TESTE: **DEVE** SER VERSIONADO PARA REPRODUÇÃO DAS SUITES ===
+!src/test/resources/testes.xlsx
+
+# === OUTROS EXEMPLOS (AJUSTE CONFORME O NOME DO SEU ARQUIVO DE TESTE EXCEL) ===
+!src/test/resources/base-importacao-teste-rn.xlsx
+
