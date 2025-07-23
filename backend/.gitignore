@@ -1,0 +1,80 @@
+# ========================
+# Backend (Java/Maven)
+# ========================
+/backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.idea/
+backend/*.iml
+
+# Maven Wrapper
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/mvnw
+backend/mvnw.cmd
+
+# IDEs Java
+backend/.factorypath
+backend/.springBeans
+backend/.sts4-cache
+backend/.apt_generated
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/out/
+
+# Logs e temporários backend
+backend/*.log
+backend/*.zip
+backend/*.tar.gz
+backend/*.tar
+backend/*.rar
+backend/*.7z
+backend/*~
+backend/*.swp
+
+# Cobertura de testes backend
+backend/coverage/
+backend/jacoco.exec
+backend/*.ec
+backend/*.coverage
+
+# ========================
+# Frontend (Angular/Node)
+# ========================
+/frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.angular/
+
+# Logs e temporários frontend
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/package-lock.json
+frontend/pnpm-lock.yaml
+frontend/yarn.lock
+
+# IDEs JS/web
+frontend/.vscode/
+frontend/.idea/
+
+# ========================
+# Arquivos de sistema (globais)
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Archives e backups (globais)
+# ========================
+*.zip
+*.tar.gz
+*.tar
+*.rar
+*.7z
+*~
+*.swp
