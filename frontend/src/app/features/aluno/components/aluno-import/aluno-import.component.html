@@ -1,0 +1,45 @@
+<div class="aluno-import-container">
+  <div class="header">
+    <h2>Importar Alunos</h2>
+    <p>Faça upload de um arquivo Excel (.xlsx) ou CSV com os dados dos alunos</p>
+  </div>
+
+  <div class="upload-section">
+    <app-file-upload [acceptedTypes]="'.xlsx,.xls'" [maxSizeInMB]="10" (fileSelected)="onFileUploaded($event)"
+      (fileError)="onFileUploadError($event)">
+    </app-file-upload>
+  </div>
+
+  <div class="processing" *ngIf="isProcessing">
+    <app-loading-spinner></app-loading-spinner>
+    <p>Processando importação...</p>
+  </div>
+
+  <div class="results" *ngIf="importResults.length > 0">
+    <h3>Resultados da Importação</h3>
+    <div class="results-summary">
+      <span class="count">{{ importResults.length }} alunos importados</span>
+    </div>
+
+    <div class="results-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Identificação</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Média das Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let aluno of importResults">
+            <td>{{ aluno.identificacao }}</td>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.idade }}</td>
+            <td>{{ aluno.mediaNotas | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

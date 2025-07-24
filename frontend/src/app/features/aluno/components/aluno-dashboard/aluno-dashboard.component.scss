@@ -1,0 +1,201 @@
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1rem;
+}
+
+.dashboard-container .header h2 {
+  color: #333;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.dashboard-container .header .refresh-btn {
+  background: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.dashboard-container .header .refresh-btn:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.dashboard-container .header .refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dashboard-container .header .refresh-btn .icon-refresh::before {
+  content: '↻';
+  font-size: 16px;
+}
+
+.dashboard-container .dashboard-content {
+  margin-top: 2rem;
+}
+
+.dashboard-container .dashboard-content .stats-grid {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card {
+  flex: 1;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #0001;
+  padding: 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 150px;
+  border-left: 4px solid #dee2e6;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card.primary {
+  border-left-color: #007bff;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card.secondary {
+  border-left-color: #17a2b8;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card.success {
+  border-left-color: #28a745;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card.warning {
+  border-left-color: #ffc107;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #007bff15;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-icon .icon-users::before {
+  content: '👥';
+  font-size: 26px;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-icon .icon-age::before {
+  content: '🎂';
+  font-size: 26px;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-icon .icon-grade::before {
+  content: '📊';
+  font-size: 26px;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-icon .icon-trophy::before {
+  content: '🏆';
+  font-size: 26px;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-content h3 {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.dashboard-container .dashboard-content .stats-grid .stat-card .stat-content p {
+  margin: 2px 0 0 0;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.dashboard-container .dashboard-content .details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.7rem;
+}
+
+.dashboard-container .dashboard-content .details-grid .detail-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px #0001;
+  min-width: 160px;
+}
+
+.dashboard-container .dashboard-content .details-grid .detail-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: #007bff;
+  font-size: 1.13rem;
+  font-weight: 600;
+}
+
+.dashboard-container .dashboard-content .details-grid .detail-card .detail-content p {
+  margin: 0.3rem 0;
+  color: #444;
+  font-size: 0.96rem;
+}
+
+.dashboard-container .no-data {
+  text-align: center;
+  color: #888;
+  margin: 3rem 0;
+}
+
+.dashboard-container .no-data .no-data-icon {
+  font-size: 60px;
+  margin-bottom: 16px;
+}
+
+.dashboard-container .no-data .no-data-icon .icon-empty::before {
+  content: '📉';
+}
+
+.dashboard-container .no-data h3 {
+  margin: 0.2rem 0 0.4rem 0;
+  color: #6c757d;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dashboard-container .no-data p {
+  font-size: 15px;
+  color: #999;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container .dashboard-content .stats-grid,
+  .dashboard-container .dashboard-content .details-grid {
+    flex-direction: column;
+    display: block;
+  }
+  
+  .dashboard-container .dashboard-content .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

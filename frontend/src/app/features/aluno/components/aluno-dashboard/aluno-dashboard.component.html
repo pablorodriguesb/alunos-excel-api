@@ -1,0 +1,103 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h2>Dashboard - Estatísticas dos Alunos</h2>
+    <button class="refresh-btn" (click)="refreshDashboard()">
+      <i class="icon-refresh"></i>
+      Atualizar
+    </button>
+  </div>
+
+  <div class="dashboard-content" *ngIf="stats.totalAlunos > 0; else noData">
+    <!-- Cards de estatísticas principais -->
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-icon">
+          <i class="icon-users"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ stats.totalAlunos }}</h3>
+          <p>Total de Alunos</p>
+        </div>
+      </div>
+
+      <div class="stat-card secondary">
+        <div class="stat-icon">
+          <i class="icon-age"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ stats.idadeMedia | number:'1.1-1' }}</h3>
+          <p>Idade Média</p>
+        </div>
+      </div>
+
+      <div class="stat-card success">
+        <div class="stat-icon">
+          <i class="icon-grade"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ stats.mediaGeralNotas | number:'1.2-2' }}</h3>
+          <p>Média Geral das Notas</p>
+        </div>
+      </div>
+
+      <div class="stat-card warning">
+        <div class="stat-icon">
+          <i class="icon-trophy"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ stats.melhorMedia | number:'1.2-2' }}</h3>
+          <p>Melhor Média</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Informações detalhadas -->
+    <div class="details-grid">
+      <div class="detail-card">
+        <h4>Aluno Mais Novo</h4>
+        <div class="detail-content" *ngIf="stats.alunoMaisNovo">
+          <p><strong>Nome:</strong> {{ stats.alunoMaisNovo.nome }}</p>
+          <p><strong>Idade:</strong> {{ stats.alunoMaisNovo.idade }} anos</p>
+          <p><strong>Média:</strong> {{ stats.alunoMaisNovo.mediaNotas | number:'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h4>Aluno Mais Velho</h4>
+        <div class="detail-content" *ngIf="stats.alunoMaisVelho">
+          <p><strong>Nome:</strong> {{ stats.alunoMaisVelho.nome }}</p>
+          <p><strong>Idade:</strong> {{ stats.alunoMaisVelho.idade }} anos</p>
+          <p><strong>Média:</strong> {{ stats.alunoMaisVelho.mediaNotas | number:'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h4>Distribuição de Notas</h4>
+        <div class="detail-content">
+          <p><strong>Melhor média:</strong> {{ stats.melhorMedia | number:'1.2-2' }}</p>
+          <p><strong>Pior média:</strong> {{ stats.piorMedia | number:'1.2-2' }}</p>
+          <p><strong>Amplitude:</strong> {{ (stats.melhorMedia - stats.piorMedia) | number:'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h4>Resumo Geral</h4>
+        <div class="detail-content">
+          <p><strong>Total de registros:</strong> {{ stats.totalAlunos }}</p>
+          <p><strong>Média de idade:</strong> {{ stats.idadeMedia | number:'1.1-1' }} anos</p>
+          <p><strong>Performance geral:</strong> {{ stats.mediaGeralNotas | number:'1.2-2' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data">
+      <div class="no-data-icon">
+        <i class="icon-empty"></i>
+      </div>
+      <h3>Nenhum dado disponível</h3>
+      <p>Importe dados de alunos para visualizar as estatísticas no dashboard.</p>
+    </div>
+  </ng-template>
+</div>

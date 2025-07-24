@@ -1,0 +1,218 @@
+.export-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+
+    h2 {
+      margin: 0;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+
+  .export-content {
+    .export-info {
+      margin-bottom: 30px;
+
+      .info-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 25px;
+
+        .info-icon {
+          width: 50px;
+          height: 50px;
+          background: #007bff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+
+          .icon-download::before {
+            content: '⬇';
+            color: white;
+            font-size: 24px;
+          }
+        }
+
+        .info-content {
+          flex: 1;
+
+          h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.5;
+          }
+        }
+      }
+
+      .data-summary {
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 20px;
+
+        .summary-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 0;
+          border-bottom: 1px solid #f1f3f4;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .label {
+            color: #495057;
+            font-weight: 500;
+            font-size: 14px;
+          }
+
+          .value {
+            color: #007bff;
+            font-weight: 600;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .export-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+
+      .refresh-btn {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+          background: #545b62;
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .icon-refresh::before {
+          content: '↻';
+          font-size: 16px;
+        }
+      }
+
+      .export-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background-color 0.2s;
+
+        &:hover:not(:disabled) {
+          background: #218838;
+        }
+
+        &:disabled {
+          background: #6c757d;
+          cursor: not-allowed;
+        }
+
+        .icon-download::before {
+          content: '⬇';
+          font-size: 18px;
+        }
+      }
+    }
+
+    .export-note {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 6px;
+      padding: 15px;
+      text-align: center;
+
+      p {
+        margin: 4px 0;
+        color: #856404;
+        font-size: 14px;
+
+        &:first-child {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .export-container {
+    padding: 15px;
+
+    .export-content {
+      .export-info {
+        .info-card {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+
+        .data-summary {
+          .summary-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+          }
+        }
+      }
+
+      .export-actions {
+        flex-direction: column;
+
+        .refresh-btn,
+        .export-btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

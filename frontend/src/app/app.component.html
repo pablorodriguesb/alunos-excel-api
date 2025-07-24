@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<div class="app-container">
+  <!-- Header/Navbar -->
+  <header class="app-header">
+    <div class="container">
+      <h1 class="app-title">
+        <i class="fas fa-graduation-cap"></i>
+        {{ title }}
+      </h1>
+      <nav class="app-nav">
+        <ul>
+          <li>
+            <a routerLink="/alunos" routerLinkActive="active">
+              <i class="fas fa-users"></i>
+              Alunos
+            </a>
+          </li>
+          <li>
+            <a routerLink="/alunos/dashboard" routerLinkActive="active">
+              <i class="fas fa-chart-line"></i>
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Loading Spinner Global -->
+  <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="container">
+      <!-- Notification Component -->
+      <app-notification></app-notification>
+      
+      <!-- Router Outlet - Conteúdo das rotas -->
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container">
+      <p>&copy; 2025 Sistema de Gerenciamento de Alunos. Desenvolvido com Angular.</p>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,43 @@
+<div class="aluno-list-container">
+  <div class="header">
+    <h2>Lista de Alunos</h2>
+    <button class="refresh-btn" (click)="refreshList()">
+      <i class="icon-refresh"></i>
+      Atualizar
+    </button>
+  </div>
+
+  <div class="content" *ngIf="alunos.length > 0; else noData">
+    <div class="table-container">
+      <table class="aluno-table">
+        <thead>
+          <tr>
+            <th>Identificação</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Média das Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let aluno of alunos; trackBy: trackByIdentificacao">
+            <td>{{ aluno.identificacao }}</td>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.idade }} anos</td>
+            <td class="media-nota">{{ aluno.mediaNotas | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="summary">
+      <span class="total-count">Total de alunos: {{ alunos.length }}</span>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data">
+      <p>Nenhum aluno encontrado.</p>
+      <p>Importe dados para visualizar a lista.</p>
+    </div>
+  </ng-template>
+</div>
