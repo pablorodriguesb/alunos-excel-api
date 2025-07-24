@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AlunoService } from '../../services/aluno.service';
@@ -18,6 +19,8 @@ interface DashboardStats {
 
 @Component({
   selector: 'app-aluno-dashboard',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './aluno-dashboard.component.html',
   styleUrls: ['./aluno-dashboard.component.scss']
 })
@@ -83,23 +86,17 @@ export class AlunoDashboardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Total de alunos
     this.stats.totalAlunos = alunos.length;
-
-    // Idade média
     const somaIdades = alunos.reduce((sum, aluno) => sum + aluno.idade, 0);
     this.stats.idadeMedia = Math.round(somaIdades / alunos.length * 100) / 100;
 
-    // Média geral das notas
     const somaMedias = alunos.reduce((sum, aluno) => sum + aluno.mediaNotas, 0);
     this.stats.mediaGeralNotas = Math.round(somaMedias / alunos.length * 100) / 100;
 
-    // Aluno mais novo e mais velho
     const alunosOrdenadosPorIdade = [...alunos].sort((a, b) => a.idade - b.idade);
     this.stats.alunoMaisNovo = alunosOrdenadosPorIdade[0];
     this.stats.alunoMaisVelho = alunosOrdenadosPorIdade[alunosOrdenadosPorIdade.length - 1];
 
-    // Melhor e pior média
     const medias = alunos.map(aluno => aluno.mediaNotas);
     this.stats.melhorMedia = Math.max(...medias);
     this.stats.piorMedia = Math.min(...medias);
