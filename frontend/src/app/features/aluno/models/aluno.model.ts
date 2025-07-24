@@ -1,4 +1,4 @@
-export interface AlunoDTO {
+export interface Aluno {
   identificacao: string;
   nome: string;
   idade: number;
