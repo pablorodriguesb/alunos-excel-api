@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { NotificationComponent } from './shared/components/notification/notification.component';
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     LoadingSpinnerComponent,
     NotificationComponent
