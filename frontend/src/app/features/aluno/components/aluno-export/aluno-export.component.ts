@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AlunoService } from '../../services/aluno.service';
@@ -7,6 +8,8 @@ import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-aluno-export',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './aluno-export.component.html',
   styleUrls: ['./aluno-export.component.scss']
 })
@@ -74,11 +77,10 @@ export class AlunoExportComponent implements OnInit, OnDestroy {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    
     const today = new Date();
     const dateStr = today.toISOString().split('T')[0];
     link.download = `alunos_estatisticas_${dateStr}.xlsx`;
-    
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
