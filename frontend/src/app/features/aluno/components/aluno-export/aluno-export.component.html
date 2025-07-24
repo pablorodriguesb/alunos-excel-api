@@ -1,0 +1,57 @@
+<div class="export-container">
+  <div class="header">
+    <h2>Exportar Dados</h2>
+  </div>
+
+  <div class="export-content">
+    <div class="export-info">
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="icon-download"></i>
+        </div>
+        <div class="info-content">
+          <h3>Exportar Lista de Alunos</h3>
+          <p>Baixe um arquivo Excel com as estatísticas dos alunos cadastrados no sistema.</p>
+        </div>
+      </div>
+
+      <div class="data-summary">
+        <div class="summary-item">
+          <span class="label">Total de registros:</span>
+          <span class="value">{{ totalAlunos }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Formato do arquivo:</span>
+          <span class="value">Excel (.xlsx)</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Colunas incluídas:</span>
+          <span class="value">Identificação, Nome, Idade, Média das Notas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="export-actions">
+      <button 
+        class="refresh-btn" 
+        (click)="refreshCount()"
+        [disabled]="isExporting">
+        <i class="icon-refresh"></i>
+        Atualizar Contagem
+      </button>
+
+      <button 
+        class="export-btn" 
+        (click)="exportarExcel()"
+        [disabled]="totalAlunos === 0 || isExporting">
+        <i class="icon-download"></i>
+        {{ isExporting ? 'Exportando...' : 'Exportar Excel' }}
+      </button>
+    </div>
+
+    <div class="export-note" *ngIf="totalAlunos === 0">
+      <p><strong>Atenção:</strong> Não há dados para exportar.</p>
+      <p>Importe dados de alunos antes de realizar a exportação.</p>
+    </div>
+  </div>
+</div>
