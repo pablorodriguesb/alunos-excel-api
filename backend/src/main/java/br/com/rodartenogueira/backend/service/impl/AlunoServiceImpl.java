@@ -131,7 +131,7 @@ public class AlunoServiceImpl implements AlunoService {
             header.createCell(3).setCellValue("Média das Notas");
 
             // Busca alunos e monta linhas
-            List<Aluno> alunos = alunoRepository.findAll();
+            List<Aluno> alunos = new ArrayList<>(alunoRepository.findAll());
             alunos.sort(Comparator.comparing(aluno ->
                     Period.between(aluno.getDataNascimento(), LocalDate.now()).getYears()
             ));
