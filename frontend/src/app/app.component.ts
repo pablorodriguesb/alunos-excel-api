@@ -22,7 +22,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Sistema de Gerenciamento de Alunos';
+  title = 'Gerenciamento de Alunos';
   isLoading$: Observable<boolean>;
 
   constructor(
