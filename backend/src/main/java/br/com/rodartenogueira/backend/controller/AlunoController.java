@@ -2,6 +2,7 @@ package br.com.rodartenogueira.backend.controller;
 
 import br.com.rodartenogueira.backend.dto.AlunoDTO;
 import br.com.rodartenogueira.backend.service.AlunoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -22,17 +23,20 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
+    @Operation(summary = "Importa dados de alunos via arquivo Excel")
     @PostMapping("/importar")
     public ResponseEntity<Void> importar(@RequestParam("file") MultipartFile file) {
         alunoService.importarExcel(file);
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Consulta estatísticas dos alunos")
     @GetMapping("/estatisticas")
     public List<AlunoDTO> estatisticas() {
         return alunoService.listarEstatisticas();
     }
 
+    @Operation(summary = "Exporta planilha Excel dos alunos")
     @GetMapping("/exportar")
     public ResponseEntity<InputStreamResource> exportar() {
         ByteArrayInputStream file = alunoService.exportarExcel();
