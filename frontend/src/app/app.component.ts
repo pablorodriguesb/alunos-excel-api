@@ -6,6 +6,7 @@ import { NotificationComponent } from './shared/components/notification/notifica
 import { LoadingService } from './core/services/loading.service';
 import { NotificationService } from './core/services/notification.service';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
   imports: [
     CommonModule,
     RouterOutlet,
+    RouterLink,
     LoadingSpinnerComponent,
     NotificationComponent
   ],
