@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 <div class="app-container">
-  <!-- Header/Navbar -->
+  <!-- Header -->
   <header class="app-header">
     <div class="container">
       <h1 class="app-title">
@@ -21,21 +20,35 @@
               Dashboard
             </a>
           </li>
+          <li>
+            <a routerLink="/alunos/importar" routerLinkActive="active">
+              <i class="fas fa-file-import"></i>
+              Importar Alunos
+            </a>
+          </li>
+          <li>
+            <a routerLink="/alunos/exportar" routerLinkActive="active">
+              <i class="fas fa-file-export"></i>
+              Exportar Alunos
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
   <!-- Loading Spinner Global -->
-  <app-loading-spinner *ngIf="isLoading$ | async"></app-loading-spinner>
+  <ng-container *ngIf="isLoading$ | async as isLoading">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</ng-container>
 
-  <!-- Main Content -->
+  <!-- Conteudo principal -->
   <main class="app-main">
     <div class="container">
-      <!-- Notification Component -->
+
       <app-notification></app-notification>
-      
-      <!-- Router Outlet - Conteúdo das rotas -->
+
+
       <router-outlet></router-outlet>
     </div>
   </main>
@@ -43,7 +56,7 @@
   <!-- Footer -->
   <footer class="app-footer">
     <div class="container">
-      <p>&copy; 2025 Sistema de Gerenciamento de Alunos. Desenvolvido com Angular.</p>
+      <p>&copy; 2025 Desenvolvido por Pablo Batista.</p>
     </div>
   </footer>
 </div>
