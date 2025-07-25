@@ -1,14 +1,15 @@
-# Sistema de Gerenciamento de Alunos
+# 🎓 Sistema de Gerenciamento de Alunos
 
-Sistema Spring Boot para importação, processamento, cálculo de estatísticas e exportação de dados de alunos via planilhas Excel e API REST.
+![Dashboard - Print da aplicação](frontend/public/dashboard-screenshot.png)
 
-> **Nota:** O frontend Angular será adicionado em breve. Atualmente, este repositório contempla o backend completo.
+Sistema completo Spring Boot + Angular para importação, processamento, cálculo de estatísticas e exportação de dados de alunos via planilhas Excel e API REST.
 
+> **✅ Frontend Angular agora incluso:** O repositório agora contempla tanto o backend Spring Boot quanto o frontend Angular completo, organizados em subpastas dedicadas (`/backend` e `/frontend`).
 ---
 
 ## 1. Contexto Geral
 
-Este projeto implementa um sistema backend para manipulação de dados de alunos, incluindo leitura de planilhas Excel, cálculo de estatísticas e exposição de dados via API REST. O backend foi desenvolvido em Spring Boot, com frontend Angular planejado para desenvolvimento futuro.
+Este projeto implementa um sistema completo full-stack para manipulação de dados de alunos, incluindo leitura de planilhas Excel, cálculo de estatísticas e exposição de dados via API REST. O backend foi desenvolvido em Spring Boot e o frontend em Angular 20+, proporcionando uma experiência de usuário moderna e responsiva.
 
 ---
 
@@ -27,12 +28,15 @@ Este projeto implementa um sistema backend para manipulação de dados de alunos
 - **API documentada** com Swagger/OpenAPI
 - **Validação, tratamento e manipulação** de entradas
 
-### 2.2. Frontend (Angular)
+### 2.2. Frontend (Angular 20+)
 
-- **Visualização dos dados** em tabela: identificação, nome, idade, média das notas
-- **Upload de arquivo Excel** para importação automática
-- **Botão de download/exportação** dos dados processados (.xlsx)
-- **Indicadores de loading, erro e sucesso** em integrações
+- **Dashboard de Estatísticas:** Visão geral completa com métricas avançadas incluindo total de alunos, idade média, média geral das notas, melhor média, identificação de alunos mais novos/velhos, distribuição de notas e resumo geral
+- **Listagem de Alunos:** Tabela detalhada e responsiva exibindo identificação, nome, idade e média das notas, ordenada por idade crescente, com funcionalidade de atualização em tempo real
+- **Importação de Excel:** Interface intuitiva de drag-and-drop para upload de arquivos .xlsx, com feedback visual, indicadores de progresso, mensagens de sucesso/erro e validação de formato
+- **Exportação de Dados:** Tela dedicada para download de planilhas Excel processadas, mostrando preview dos dados a serem exportados (total de registros, formato, colunas incluídas)
+- **Navegação SPA:** Roteamento Angular moderno entre páginas com menu superior intuitivo
+- **Comunicação RESTful:** Integração total com endpoints do backend via HttpClient
+- **UX/UI Responsiva:** Design moderno e responsivo com componentes standalone Angular
 
 ---
 
@@ -47,14 +51,14 @@ Este projeto implementa um sistema backend para manipulação de dados de alunos
 - **JUnit 5** (testes)
 - **Swagger/OpenAPI**
 - **Maven**
-- **Angular** (em desenvolvimento)
-
----
+- **Angular** 
 
 ## 4. Estrutura do Projeto
 
+## Backend
 ```
 br.com.rodartenogueira.backend
+├── config
 ├── controller
 ├── dto
 ├── enums
@@ -62,7 +66,7 @@ br.com.rodartenogueira.backend
 ├── model
 ├── repository
 ├── service
-│ 
+│   └── impl
 └── test
     └── java
         └── br.com.rodartenogueira.backend
@@ -71,6 +75,32 @@ br.com.rodartenogueira.backend
             └── service
                 └── impl
                     └── integration
+```
+
+## Frontend
+```
+frontend/
+└── src
+    ├── app
+    │   ├── core
+    │   │   ├── interceptors
+    │   │   └── services
+    │   ├── features
+    │   │   └── aluno
+    │   │       ├── components
+    │   │       │   ├── aluno-dashboard
+    │   │       │   ├── aluno-export
+    │   │       │   ├── aluno-import
+    │   │       │   └── aluno-list
+    │   │       ├── models
+    │   │       └── services
+    │   ├── shared
+    │   │   ├── components
+    │   │   │   ├── file-upload
+    │   │   │   ├── loading-spinner
+    │   │   │   └── notification
+    │   │   └── models
+    └── environments
 ```
 
 ---
@@ -82,13 +112,14 @@ br.com.rodartenogueira.backend
 - **Java 21+**
 - **MySQL 8+** (rodando)
 - **Maven 3.8+**
-- **Node.js** (frontend Angular)
+- **Node.js**
+- **Angular CLI 20+**
 
-### 5.2. Clonando e Configurando
+### 5.2. Executando o Backend
 
 ```bash
-git clone <link-do-seu-repo>
-cd rodartenogueira/backend
+cd backend
+./mvnw spring-boot:run
 ```
 
 **Configure o banco MySQL** em `src/main/resources/application.properties`:
@@ -100,65 +131,73 @@ spring.datasource.password=SUA_SENHA
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-**Execute a aplicação:**
+### 5.3. Executando o Frontend
 
 ```bash
-./mvnw spring-boot:run
+cd frontend
+npm install
+ng serve
 ```
+
+**Acesse a aplicação:** `http://localhost:4200`
 
 ---
 
-## 6. Endpoints da API
+## 6. Páginas e Componentes do Frontend
 
-### `POST /api/alunos/importar`
-Recebe um arquivo Excel (campo: `file`) e realiza importação.
+### 6.1. Dashboard de Estatísticas (`/dashboard`)
+Tela principal com visão geral completa do sistema, apresentando:
+- **Cards de métricas:** Total de alunos, idade média, média geral das notas, melhor média
+- **Informações destacadas:** Aluno mais novo e mais velho (nome, idade, média)
+- **Distribuição de notas:** Melhor média, pior média, amplitude
+- **Resumo geral:** Total de registros, média de idade, performance geral
+- **Atualização em tempo real** via botão "Atualizar"
 
-### `GET /api/alunos/estatisticas`
-Retorna, em JSON, a lista de alunos: identificação, nome, idade (calculada), média das notas — ordenados por idade crescente.
+### 6.2. Lista de Alunos (`/alunos`)
+Tabela responsiva e completa exibindo:
+- **Colunas:** Identificação, Nome, Idade, Média das Notas
+- **Ordenação:** Por idade crescente (conforme regra de negócio)
+- **Atualização dinâmica** dos dados
+- **Design responsivo** para diferentes dispositivos
 
-### `GET /api/alunos/exportar`
-Download de planilha em Excel, idêntica à visualização da tela.
+### 6.3. Importação de Alunos (`/importar`)
+Interface de upload intuitiva com:
+- **Área de drag-and-drop** para seleção de arquivos Excel
+- **Botão "Selecionar Arquivo"** como alternativa
+- **Validação de formato** (.xlsx)
+- **Feedback visual** durante upload
+- **Mensagens de sucesso/erro** detalhadas
+- **Instruções claras** sobre formato esperado
 
-### Exemplos de Uso
-
-**Requisição cURL para importação:**
-```bash
-curl -F 'file=@/caminho/para/alunos.xlsx' http://localhost:8080/api/alunos/importar
-```
-
-**Exemplo de resposta de estatísticas:**
-```json
-[
-  {
-    "identificacao": "123456",
-    "nome": "Maria da Silva",
-    "idade": 29,
-    "mediaNotas": 25.00
-  }
-]
-```
-
----
-
-## 7. Validações e Regras de Negócio
-
-- **Notas permitidas:** 0 a 100
-- **Data de nascimento:** obrigatória, precisa ser válida no Excel
-- **Estrutura da planilha:** deve conter colunas na ordem: Identificação, Nome, Sexo, Data de Nascimento, Nota 1, Nota 2, Nota 3
-- **Importação:** dados importados sobrescrevem os existentes (re-importação substitui)
-- **Cálculo da idade:** ano atual menos ano de nascimento
-- **Média:** aritmética das três notas, exibida com duas casas decimais
-- **Exportação/exibição:** Identificação, Nome, Idade, Média das Notas
-
-> ⚠️ **Atenção:** O arquivo Excel a ser importado precisa seguir rigorosamente esta ordem de colunas (ver modelo).
+### 6.4. Exportação de Dados (`/exportar`)
+Tela dedicada para download com:
+- **Preview dos dados** a serem exportados
+- **Informações do arquivo:** Total de registros, formato Excel (.xlsx)
+- **Colunas incluídas:** Identificação, Nome, Idade, Média das Notas
+- **Botões de ação:** Atualizar contagem e Exportar Excel
+- **Feedback de processamento**
 
 ---
+## 7. Integração Frontend-Backend
 
+### 7.1. Comunicação RESTful
+O frontend Angular integra-se perfeitamente com o backend através dos endpoints REST:
+
+- **GET `/api/alunos/estatisticas`** → Dashboard e Lista de Alunos
+- **POST `/api/alunos/importar`** → Upload de arquivos Excel
+- **GET `/api/alunos/exportar`** → Download de planilhas processadas
+
+### 7.2. Arquitetura de Serviços
+- **AlunoService:** Centraliza todas as chamadas HTTP ao backend
+- **Componentes Standalone:** Arquitetura Angular moderna sem módulos
+- **Roteamento SPA:** Navegação fluida entre páginas
+- **Tratamento de erros:** Feedback consistente ao usuário
+
+---
 ## 8. Testes Automatizados
 
 - **Testes unitários** (JUnit 5, Mockito) para service e controller
 - **Teste de integração** para todos os endpoints principais
-- **Teste de carga** do contexto Spring Boot
 
 **Para executar os testes:**
 ```bash
@@ -173,15 +212,6 @@ curl -F 'file=@/caminho/para/alunos.xlsx' http://localhost:8080/api/alunos/impor
 - **API totalmente documentada** via Swagger (`http://localhost:8080/swagger-ui.html`)
 
 ---
-
-## 10. Documentação e Entregáveis
-
-### Artefatos Incluídos
-- **Código-fonte completo** (Java backend)
-- **Dump do banco de dados** MySQL (formato .sql)
-- **Amostra do arquivo Excel** exportado
-- **README detalhado** (este arquivo)
-- **API documentada** via SwaggerUI
 
 ### Observações Técnicas
 - **Timezone do banco:** utiliza `America/Sao_Paulo`
