@@ -132,6 +132,10 @@ public class AlunoServiceImpl implements AlunoService {
 
             // Busca alunos e monta linhas
             List<Aluno> alunos = alunoRepository.findAll();
+            alunos.sort(Comparator.comparing(aluno ->
+                    Period.between(aluno.getDataNascimento(), LocalDate.now()).getYears()
+            ));
+
             int rowIdx = 1;
             Locale localeBR = Locale.forLanguageTag("pt-BR");
             DecimalFormatSymbols symbols = new DecimalFormatSymbols(localeBR);
